@@ -3,23 +3,26 @@ import { FiUser, FiMail, FiPhone } from 'react-icons/fi';
 
 export default function Committee() {
   const committeeMembers = [
-    { 
-      role: 'Divisional Head — Announcing Division', 
-      name: 'Dulara Bandaranayake', 
-      email: 'dularabandaranayake@gmail.com', 
-      phone: '078 436 0194' 
+    {
+      role: 'Divisional Head — Announcing Division',
+      name: 'Dulara Bandaranayake',
+      email: 'dularabandaranayake@gmail.com',
+      phone: '078 436 0194',
+      photo: '/Committee/dulra.jpeg'
     },
-    { 
-      role: 'Chairperson — Allusion\'26', 
-      name: 'Achira Adithya Hathurusinghe', 
-      email: 'achiradithya@gmail.com', 
-      phone: '070 765 8745' 
+    {
+      role: "Chairperson — Allusion'26",
+      name: 'Achira Adithya Hathurusinghe',
+      email: 'achiradithya@gmail.com',
+      phone: '070 765 8745',
+      photo: '/Committee/achira.jpeg'
     },
-    { 
-      role: 'Assistan Chairperson — Allusion\'26', 
-      name: 'Pravijah Ganeshan ', 
-      email: 'pravijahganeshan@gmail.com', 
-      phone: '076 719 7886' 
+    {
+      role: "Assistan Chairperson — Allusion'26",
+      name: 'Pravijah Ganeshan',
+      email: 'pravijahganeshan@gmail.com',
+      phone: '076 719 7886',
+      photo: 'Committee/pravija.jpeg'
     },
   ];
 
@@ -34,12 +37,12 @@ export default function Committee() {
             Passionate students who dedicate themselves to making every announcing moment extraordinary.
           </p>
         </div>
-        
+
         <div className="exec-grid">
           {committeeMembers.map((p) => (
             <div key={p.name} className="exec-card">
               <div className="exec-avatar">
-                <FiUser />
+                <img src={p.photo} alt={p.name} />
               </div>
               <span className="exec-role">{p.role}</span>
               <div className="exec-name">{p.name}</div>
