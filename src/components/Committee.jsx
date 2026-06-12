@@ -7,19 +7,19 @@ export default function Committee() {
       role: 'Divisional Head — Announcing Division', 
       name: 'Dulara Bandaranayake', 
       email: 'dularabandaranayake@gmail.com', 
-      phone: '0784 360 194' 
+      phone: '078 436 0194' 
     },
     { 
       role: 'Chairperson — Allusion\'26', 
       name: 'Achira Adithya Hathurusinghe', 
       email: 'achiradithya@gmail.com', 
-      phone: '0707 658 745' 
+      phone: '070 765 8745' 
     },
     { 
-      role: 'Finance Head — Allusion\'26', 
-      name: 'Hashini Werahara', 
-      email: 'hashiniwerahara@gmail.com', 
-      phone: '0760 631 679' 
+      role: 'Assistan Chairperson — Allusion\'26', 
+      name: 'Pravijah Ganeshan ', 
+      email: 'pravijahganeshan@gmail.com', 
+      phone: '076 719 7886' 
     },
   ];
 
