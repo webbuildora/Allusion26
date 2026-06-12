@@ -11,14 +11,14 @@ export default function Committee() {
       photo: '/Committee/dulra.jpeg'
     },
     {
-      role: "Chairperson — Allusion'26",
+      role: "Assistant Chairperson — Allusion'26",
       name: 'Achira Adithya Hathurusinghe',
       email: 'achiradithya@gmail.com',
       phone: '070 765 8745',
       photo: '/Committee/achira.jpeg'
     },
     {
-      role: "Assistan Chairperson — Allusion'26",
+      role: "Assistant Chairperson — Allusion'26",
       name: 'Pravijah Ganeshan',
       email: 'pravijahganeshan@gmail.com',
       phone: '076 719 7886',

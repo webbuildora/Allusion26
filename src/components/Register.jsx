@@ -1,9 +1,3 @@
-/*
- * ─── GOOGLE APPS SCRIPT ────────────────────────────────────────────
- * Update the doPost function in your Apps Script to handle all fields below.
- * ───────────────────────────────────────────────────────────────────
- */
-
 import React, { useState } from 'react';
 import { FiEdit3, FiSend, FiAlertCircle, FiCheckCircle } from 'react-icons/fi';
 
@@ -50,7 +44,7 @@ const INITIAL_STATE = {
   declaration: false,
 };
 
-// ── Moved outside component to prevent focus loss on re-render ──
+// ── Outside component to prevent focus loss on re-render ──
 
 const Field = ({ id, label, required, error, children }) => (
   <div className="register-field">
