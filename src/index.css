@@ -753,3 +753,131 @@ footer {
   .register-form-row { grid-template-columns: 1fr; gap: 0; }
   .register-field.full-width { grid-column: span 1; }
 }
+
+/* =========== NAV CTA MOBILE HIDE =========== */
+@media (max-width: 768px) {
+  .nav-cta-desktop { display: none; }
+}
+
+/* =========== ORG GRID (J'PURA VOICE & ANNOUNCING) =========== */
+.org-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+.org-card {
+  background: var(--dark-card);
+  border: 1px solid var(--border);
+  padding: 2.2rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.org-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--ember), var(--amber-light));
+}
+.org-card:hover { border-color: var(--border-glow); }
+.org-card-icon {
+  font-size: 1.8rem;
+  color: var(--amber);
+  margin-bottom: 0.8rem;
+  display: flex;
+}
+.org-card-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--ember-light);
+  margin-bottom: 0.5rem;
+}
+.org-card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem; letter-spacing: 0.06em;
+  color: var(--text-white);
+  margin-bottom: 1.2rem;
+}
+.org-card-desc {
+  font-size: 0.875rem; line-height: 1.75;
+  color: var(--text-warm);
+  margin-bottom: 0.9rem;
+}
+.org-card-desc strong { color: var(--amber-light); font-weight: 600; }
+.org-card-stats {
+  display: flex; gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+.org-stat { text-align: center; }
+.org-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem; color: var(--amber-light);
+  display: block;
+}
+.org-stat-label {
+  font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-muted); display: block; margin-top: 0.15rem;
+}
+
+@media (max-width: 768px) {
+  .org-grid { grid-template-columns: 1fr; }
+}
+
+/* =========== FORM SECTION DIVIDER =========== */
+.form-section-divider {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; gap: 1rem;
+  margin: 1.5rem 0 0.5rem;
+}
+.form-section-divider span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--amber);
+  white-space: nowrap;
+}
+.form-section-divider::before,
+.form-section-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--border);
+}
+.form-section-divider::before { display: none; }
+
+/* =========== SELECT STYLING =========== */
+.register-form select {
+  width: 100%;
+  background: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  color: var(--text-white);
+  padding: 0.75rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23D4870A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  transition: border-color 0.3s;
+}
+.register-form select:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 2px rgba(212,135,10,0.15);
+}
+.register-form select option { background: var(--dark-mid); }
+
+/* =========== DECLARATION CHECKBOX =========== */
+.declaration-label {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  cursor: pointer; font-size: 0.875rem;
+  color: var(--text-warm); line-height: 1.6;
+}
+.declaration-label input[type="checkbox"] {
+  width: 18px; height: 18px; flex-shrink: 0;
+  accent-color: var(--amber);
+  cursor: pointer; margin-top: 2px;
+}

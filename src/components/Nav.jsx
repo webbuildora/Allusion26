@@ -14,7 +14,6 @@ export default function Nav() {
   const navLinks = [
     { href: '#about', label: 'About' },
     { href: '#categories', label: 'Competition' },
-    { href: '#objectives', label: 'Objectives' },
     { href: '#committee', label: 'Committee' },
     { href: '#register', label: 'Register' },
     { href: '#faq', label: 'FAQ' },
@@ -38,7 +37,7 @@ export default function Nav() {
         </ul>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="#register" className="nav-cta">Register Now</a>
+          <a href="#register" className="nav-cta nav-cta-desktop">Register Now</a>
           <button 
             className="nav-mobile-toggle" 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
