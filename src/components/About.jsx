@@ -15,13 +15,13 @@ export default function About() {
                   <FiMic /> Announcing Division · J'PURA VOICE
                 </span>
               </div>
-              
+
               <div className="section-header" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
                 <span className="section-eyebrow">What is Allusion'26?</span>
                 <h2 className="section-title">The Stage for<br />Every Voice</h2>
                 <div className="section-line" style={{ margin: '0.8rem 0' }} />
               </div>
-              
+
               <p>
                 <strong>ALLUSION'26</strong> is a trilingual inter-university and inter-school announcing competition organized by the Announcing Division of J'PURA VOICE — the Official Media &amp; Broadcasting Unit of the University of Sri Jayewardenepura.
               </p>
@@ -51,12 +51,12 @@ export default function About() {
               <div className="about-ring" />
               <div className="about-ring2" />
               <div className="about-mic-wrap">
-                <GiMicrophone 
-                  style={{ 
-                    fontSize: '9rem', 
-                    color: 'var(--amber)', 
-                    filter: 'drop-shadow(0 0 40px rgba(212,135,10,0.4))' 
-                  }} 
+                <GiMicrophone
+                  style={{
+                    fontSize: '9rem',
+                    color: 'var(--amber)',
+                    filter: 'drop-shadow(0 0 40px rgba(212,135,10,0.4))'
+                  }}
                 />
               </div>
             </div>
@@ -69,16 +69,14 @@ export default function About() {
         <div className="section-inner">
           <div className="section-header">
             <span className="section-eyebrow">The Organizers</span>
-            <h2 className="section-title">J'PURA VOICE &amp; Announcing Division</h2>
+            <h2 className="section-title">J'PURA VOICE</h2>
             <div className="section-line" />
           </div>
 
           <div className="org-grid">
             {/* J'PURA VOICE card */}
             <div className="org-card">
-              <div className="org-card-icon">
-                <FiRadio />
-              </div>
+              <img src="/logos/jpura_voice_logo.png" alt="J'PURA VOICE" style={{ height: '120px', width: 'auto', objectFit: 'contain', marginBottom: '1rem', marginTop: '0rem'}} />
               <div className="org-card-tag">"ONE FAMILY, ONE VOICE"</div>
               <h3 className="org-card-title">J'PURA VOICE</h3>
               <p className="org-card-desc">
@@ -90,21 +88,19 @@ export default function About() {
               <p className="org-card-desc">
                 J'PURA VOICE actively supports university events, national-level competitions, and media productions while offering students direct exposure to real-world media practices.
               </p>
-              <div className="org-card-stats">
+              {/* <div className="org-card-stats">
                 {[['600+','Members'],['11','Faculties'],['5','Divisions']].map(([n,l]) => (
                   <div className="org-stat" key={l}>
                     <span className="org-stat-num">{n}</span>
                     <span className="org-stat-label">{l}</span>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             {/* Announcing Division card */}
             <div className="org-card">
-              <div className="org-card-icon">
-                <FiMic />
-              </div>
+              <img src="/logos/announcing_division_logo.png" alt="Announcing Division" style={{ height: '120px', width: 'auto', objectFit: 'contain', marginBottom: '1rem', marginTop: '0rem'}} />
               <div className="org-card-tag">Key Pillar of J'PURA VOICE</div>
               <h3 className="org-card-title">Announcing Division</h3>
               <p className="org-card-desc">
@@ -116,14 +112,14 @@ export default function About() {
               <p className="org-card-desc">
                 By discovering and empowering hidden voices, the Announcing Division continues to strengthen student talent and maintain a strong presence within J'PURA VOICE.
               </p>
-              <div className="org-card-stats">
+              {/* <div className="org-card-stats">
                 {[['3','Languages'],['2','Key Projects'],['#1','By Members']].map(([n,l]) => (
                   <div className="org-stat" key={l}>
                     <span className="org-stat-num">{n}</span>
                     <span className="org-stat-label">{l}</span>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

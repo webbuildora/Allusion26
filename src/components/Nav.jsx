@@ -26,7 +26,9 @@ export default function Nav() {
   return (
     <>
       <nav style={{ boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.5)' : 'none' }}>
-        <a href="#hero" className="nav-logo">ALLUS<span>I</span>ON<span>'26</span></a>
+        <a href="#hero" className="nav-logo">
+  <img src="/logos/Allusion26.png" alt="Allusion'26" style={{ height: '50px', width: 'auto', objectFit: 'contain' }} />
+</a>
         
         <ul className="nav-links">
           {navLinks.map((link) => (

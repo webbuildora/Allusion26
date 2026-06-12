@@ -4,7 +4,10 @@
  * ───────────────────────────────────────────────────────────────────
  */
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxNZaydtTvcVARRnAgxHAfq-esuyIWISaznG480c9s4nddJ8T8Rfr0XUI_Oo7RiQHp76Q/exec';
+import React, { useState } from 'react';
+import { FiEdit3, FiSend, FiAlertCircle, FiCheckCircle } from 'react-icons/fi';
+
+const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzTdg29hhFCwu_u6gotitMZoXCLmNiJpNeM7UNarCinPgT8UgiOhlvaROWhctnFK3_t/exec';
 
 const SRI_LANKA_DISTRICTS = [
   'Ampara','Anuradhapura','Badulla','Batticaloa','Colombo','Galle','Gampaha',
@@ -13,42 +16,32 @@ const SRI_LANKA_DISTRICTS = [
   'Puttalam','Ratnapura','Trincomalee','Vavuniya'
 ];
 
-import React, { useState } from 'react';
-import { FiEdit3, FiSend, FiAlertCircle, FiCheckCircle } from 'react-icons/fi';
-
 const INITIAL_STATE = {
   teamCategory: '',
   preferredLanguage: '',
-  // School fields
   district: '',
   schoolName: '',
   schoolAddress: '',
   teamName: '',
-  // Contestant 1
   c1Name: '',
   c1Email: '',
   c1Phone: '',
   c1Grade: '',
-  // Contestant 2
   c2Name: '',
   c2Email: '',
   c2Phone: '',
   c2Grade: '',
-  // Teacher-in-charge (school)
   teacherName: '',
   teacherPhone: '',
   teacherEmail: '',
-  // University fields
   universityName: '',
   faculty: '',
   uniTeamName: '',
-  // Uni Contestant 1
   uc1Name: '',
   uc1RegNo: '',
   uc1Phone: '',
   uc1Email: '',
   uc1Year: '',
-  // Uni Contestant 2
   uc2Name: '',
   uc2RegNo: '',
   uc2Phone: '',
@@ -56,6 +49,24 @@ const INITIAL_STATE = {
   uc2Year: '',
   declaration: false,
 };
+
+// ── Moved outside component to prevent focus loss on re-render ──
+
+const Field = ({ id, label, required, error, children }) => (
+  <div className="register-field">
+    <label className="register-label" htmlFor={id}>
+      {label}{required && ' *'}
+    </label>
+    {children}
+    {error && <span className="error-message"><FiAlertCircle /> {error}</span>}
+  </div>
+);
+
+const SectionDivider = ({ title }) => (
+  <div className="form-section-divider">
+    <span>{title}</span>
+  </div>
+);
 
 export default function Register() {
   const [formData, setFormData] = useState(INITIAL_STATE);
@@ -133,7 +144,7 @@ export default function Register() {
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setErrorMessage('');
-    fetch(APPS_SCRIPT_URL, {
+    fetch(SHEET_ENDPOINT, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain' },
@@ -146,32 +157,6 @@ export default function Register() {
       })
       .finally(() => { setIsSubmitting(false); });
   };
-
-  const Field = ({ id, label, required, error, children }) => (
-    <div className="register-field">
-      <label className="register-label" htmlFor={id}>
-        {label}{required && ' *'}
-      </label>
-      {children}
-      {error && <span className="error-message"><FiAlertCircle /> {error}</span>}
-    </div>
-  );
-
-  const TextInput = ({ name, type = 'text', placeholder, id }) => (
-    <input
-      type={type} id={id || name} name={name}
-      value={formData[name]} onChange={handleChange}
-      className={errors[name] ? 'error-field' : ''}
-      placeholder={placeholder || ''}
-      disabled={isSubmitting}
-    />
-  );
-
-  const SectionDivider = ({ title }) => (
-    <div className="form-section-divider">
-      <span>{title}</span>
-    </div>
-  );
 
   if (submitStatus === 'success') {
     return (
@@ -206,7 +191,6 @@ export default function Register() {
             <SectionDivider title="General Information" />
 
             <div className="register-form-row">
-              {/* Team Category */}
               <Field label="Team Category" required error={errors.teamCategory}>
                 <div className="pill-group">
                   {['School', 'University'].map(opt => (
@@ -219,7 +203,6 @@ export default function Register() {
                 </div>
               </Field>
 
-              {/* Preferred Language */}
               <Field label="Preferred Language" required error={errors.preferredLanguage}>
                 <div className="pill-group">
                   {['Sinhala', 'Tamil', 'English'].map(opt => (
@@ -249,67 +232,81 @@ export default function Register() {
                     </select>
                   </Field>
                   <Field label="School Name" required error={errors.schoolName}>
-                    <TextInput name="schoolName" />
+                    <input type="text" name="schoolName" value={formData.schoolName}
+                      onChange={handleChange} className={errors.schoolName ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                 </div>
 
                 <div className="register-form-row">
                   <Field label="School Address" error={errors.schoolAddress}>
-                    <TextInput name="schoolAddress" />
+                    <input type="text" name="schoolAddress" value={formData.schoolAddress}
+                      onChange={handleChange} disabled={isSubmitting} />
                   </Field>
                   <Field label="Team / Duo Name" required error={errors.teamName}>
-                    <TextInput name="teamName" />
+                    <input type="text" name="teamName" value={formData.teamName}
+                      onChange={handleChange} className={errors.teamName ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                 </div>
 
                 <SectionDivider title="Contestant 1 Details" />
                 <div className="register-form-row">
                   <Field label="First Contestant Full Name" required error={errors.c1Name}>
-                    <TextInput name="c1Name" />
+                    <input type="text" name="c1Name" value={formData.c1Name}
+                      onChange={handleChange} className={errors.c1Name ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                   <Field label="Email Address" required error={errors.c1Email}>
-                    <TextInput name="c1Email" type="email" />
+                    <input type="email" name="c1Email" value={formData.c1Email}
+                      onChange={handleChange} className={errors.c1Email ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                 </div>
                 <div className="register-form-row">
                   <Field label="Phone Number / WhatsApp Number" required error={errors.c1Phone}>
-                    <TextInput name="c1Phone" type="tel" />
+                    <input type="tel" name="c1Phone" value={formData.c1Phone}
+                      onChange={handleChange} className={errors.c1Phone ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                   <Field label="Grade" required error={errors.c1Grade}>
-                    <TextInput name="c1Grade" placeholder="e.g. Grade 12" />
+                    <input type="text" name="c1Grade" value={formData.c1Grade}
+                      onChange={handleChange} className={errors.c1Grade ? 'error-field' : ''} disabled={isSubmitting} placeholder="e.g. Grade 12" />
                   </Field>
                 </div>
 
                 <SectionDivider title="Contestant 2 Details" />
                 <div className="register-form-row">
                   <Field label="Second Contestant Full Name" required error={errors.c2Name}>
-                    <TextInput name="c2Name" />
+                    <input type="text" name="c2Name" value={formData.c2Name}
+                      onChange={handleChange} className={errors.c2Name ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                   <Field label="Email Address" required error={errors.c2Email}>
-                    <TextInput name="c2Email" type="email" />
+                    <input type="email" name="c2Email" value={formData.c2Email}
+                      onChange={handleChange} className={errors.c2Email ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                 </div>
                 <div className="register-form-row">
                   <Field label="Phone Number / WhatsApp Number" required error={errors.c2Phone}>
-                    <TextInput name="c2Phone" type="tel" />
+                    <input type="tel" name="c2Phone" value={formData.c2Phone}
+                      onChange={handleChange} className={errors.c2Phone ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                   <Field label="Grade" required error={errors.c2Grade}>
-                    <TextInput name="c2Grade" placeholder="e.g. Grade 11" />
+                    <input type="text" name="c2Grade" value={formData.c2Grade}
+                      onChange={handleChange} className={errors.c2Grade ? 'error-field' : ''} disabled={isSubmitting} placeholder="e.g. Grade 11" />
                   </Field>
                 </div>
 
                 <SectionDivider title="Teacher-in-Charge Details" />
                 <div className="register-form-row">
                   <Field label="Teacher-in-Charge Name" required error={errors.teacherName}>
-                    <TextInput name="teacherName" />
+                    <input type="text" name="teacherName" value={formData.teacherName}
+                      onChange={handleChange} className={errors.teacherName ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                   <Field label="Teacher-in-Charge Phone Number" required error={errors.teacherPhone}>
-                    <TextInput name="teacherPhone" type="tel" />
+                    <input type="tel" name="teacherPhone" value={formData.teacherPhone}
+                      onChange={handleChange} className={errors.teacherPhone ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                 </div>
                 <div className="register-form-row">
                   <Field label="Teacher-in-Charge Email Address" error={errors.teacherEmail}>
-                    <TextInput name="teacherEmail" type="email" />
+                    <input type="email" name="teacherEmail" value={formData.teacherEmail}
+                      onChange={handleChange} disabled={isSubmitting} />
                   </Field>
                   <div className="register-field" />
                 </div>
@@ -325,15 +322,18 @@ export default function Register() {
 
                 <div className="register-form-row">
                   <Field label="University Name" required error={errors.universityName}>
-                    <TextInput name="universityName" />
+                    <input type="text" name="universityName" value={formData.universityName}
+                      onChange={handleChange} className={errors.universityName ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                   <Field label="Faculty" required error={errors.faculty}>
-                    <TextInput name="faculty" />
+                    <input type="text" name="faculty" value={formData.faculty}
+                      onChange={handleChange} className={errors.faculty ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                 </div>
                 <div className="register-form-row">
                   <Field label="Team / Duo Name" required error={errors.uniTeamName}>
-                    <TextInput name="uniTeamName" />
+                    <input type="text" name="uniTeamName" value={formData.uniTeamName}
+                      onChange={handleChange} className={errors.uniTeamName ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                   <div className="register-field" />
                 </div>
@@ -341,23 +341,28 @@ export default function Register() {
                 <SectionDivider title="Contestant 1 Details" />
                 <div className="register-form-row">
                   <Field label="First Contestant Full Name" required error={errors.uc1Name}>
-                    <TextInput name="uc1Name" />
+                    <input type="text" name="uc1Name" value={formData.uc1Name}
+                      onChange={handleChange} className={errors.uc1Name ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                   <Field label="Registration / MC Number" required error={errors.uc1RegNo}>
-                    <TextInput name="uc1RegNo" />
+                    <input type="text" name="uc1RegNo" value={formData.uc1RegNo}
+                      onChange={handleChange} className={errors.uc1RegNo ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                 </div>
                 <div className="register-form-row">
                   <Field label="Phone Number / WhatsApp Number" required error={errors.uc1Phone}>
-                    <TextInput name="uc1Phone" type="tel" />
+                    <input type="tel" name="uc1Phone" value={formData.uc1Phone}
+                      onChange={handleChange} className={errors.uc1Phone ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                   <Field label="Email Address" required error={errors.uc1Email}>
-                    <TextInput name="uc1Email" type="email" />
+                    <input type="email" name="uc1Email" value={formData.uc1Email}
+                      onChange={handleChange} className={errors.uc1Email ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                 </div>
                 <div className="register-form-row">
                   <Field label="Academic Year" error={errors.uc1Year}>
-                    <TextInput name="uc1Year" placeholder="e.g. 2nd Year" />
+                    <input type="text" name="uc1Year" value={formData.uc1Year}
+                      onChange={handleChange} disabled={isSubmitting} placeholder="e.g. 2nd Year" />
                   </Field>
                   <div className="register-field" />
                 </div>
@@ -365,23 +370,28 @@ export default function Register() {
                 <SectionDivider title="Contestant 2 Details" />
                 <div className="register-form-row">
                   <Field label="Second Contestant Full Name" required error={errors.uc2Name}>
-                    <TextInput name="uc2Name" />
+                    <input type="text" name="uc2Name" value={formData.uc2Name}
+                      onChange={handleChange} className={errors.uc2Name ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                   <Field label="Registration / MC Number" required error={errors.uc2RegNo}>
-                    <TextInput name="uc2RegNo" />
+                    <input type="text" name="uc2RegNo" value={formData.uc2RegNo}
+                      onChange={handleChange} className={errors.uc2RegNo ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                 </div>
                 <div className="register-form-row">
                   <Field label="Phone Number / WhatsApp Number" required error={errors.uc2Phone}>
-                    <TextInput name="uc2Phone" type="tel" />
+                    <input type="tel" name="uc2Phone" value={formData.uc2Phone}
+                      onChange={handleChange} className={errors.uc2Phone ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                   <Field label="Email Address" required error={errors.uc2Email}>
-                    <TextInput name="uc2Email" type="email" />
+                    <input type="email" name="uc2Email" value={formData.uc2Email}
+                      onChange={handleChange} className={errors.uc2Email ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
                 </div>
                 <div className="register-form-row">
                   <Field label="Academic Year" error={errors.uc2Year}>
-                    <TextInput name="uc2Year" placeholder="e.g. 3rd Year" />
+                    <input type="text" name="uc2Year" value={formData.uc2Year}
+                      onChange={handleChange} disabled={isSubmitting} placeholder="e.g. 3rd Year" />
                   </Field>
                   <div className="register-field" />
                 </div>
