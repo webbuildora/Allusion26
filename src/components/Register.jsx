@@ -338,7 +338,7 @@ export default function Register() {
                     <input type="text" name="uc1Name" value={formData.uc1Name}
                       onChange={handleChange} className={errors.uc1Name ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
-                  <Field label="Registration / MC Number" required error={errors.uc1RegNo}>
+                  <Field label="Registration Number" required error={errors.uc1RegNo}>
                     <input type="text" name="uc1RegNo" value={formData.uc1RegNo}
                       onChange={handleChange} className={errors.uc1RegNo ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
@@ -367,7 +367,7 @@ export default function Register() {
                     <input type="text" name="uc2Name" value={formData.uc2Name}
                       onChange={handleChange} className={errors.uc2Name ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
-                  <Field label="Registration / MC Number" required error={errors.uc2RegNo}>
+                  <Field label="Registration Number" required error={errors.uc2RegNo}>
                     <input type="text" name="uc2RegNo" value={formData.uc2RegNo}
                       onChange={handleChange} className={errors.uc2RegNo ? 'error-field' : ''} disabled={isSubmitting} />
                   </Field>
